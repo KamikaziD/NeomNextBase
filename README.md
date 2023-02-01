@@ -1,0 +1,2 @@
+# NeomNextBase
+Neom NextJS Base
