@@ -13,14 +13,25 @@ export const getStaticProps: GetStaticProps = async () => {
       },
     },
   });
+  const response = await fetch("http://localhost:3000/api", {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  const test = await response.json();
   return {
-    props: { feed },
+    props: { feed, test },
     revalidate: 10,
   };
+};
+type TestProps = {
+  id: number;
+  title: string;
+  body: string;
 };
 
 type Props = {
   feed: PostProps[];
+  test: TestProps[];
 };
 
 const Blog: React.FC<Props> = (props) => {
@@ -29,7 +40,7 @@ const Blog: React.FC<Props> = (props) => {
       <div className="page">
         <h1>Public Feed</h1>
         <main>
-          {props.feed.map((post) => (
+          {props.test.map((post) => (
             <div key={post.id} className="post">
               <Post post={post} />
             </div>
